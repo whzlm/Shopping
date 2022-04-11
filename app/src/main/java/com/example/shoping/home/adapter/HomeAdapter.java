@@ -100,9 +100,9 @@ public class HomeAdapter extends RecyclerView.Adapter {
             textSliderView3.description("第二个轮播图的描述信息").image(R.drawable.banner3);
             sliderShow.addSlider(textSliderView3);
 
-            sliderShow.setDuration(2000);
+            sliderShow.setDuration(3000);
             sliderShow.setPresetTransformer(SliderLayout.Transformer.Default);
-            sliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
+            sliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
 
         }
 
