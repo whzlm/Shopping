@@ -1,12 +1,18 @@
 package com.example.shoping.home.adapter;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.example.shoping.R;
 
 public class HomeAdapter extends RecyclerView.Adapter {
@@ -66,7 +72,41 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
         public BannerHolder(@NonNull View itemView) {
             super(itemView);
+
+            SliderLayout sliderShow = (SliderLayout) itemView.findViewById(R.id.slider);
+
+            DefaultSliderView textSliderView = new DefaultSliderView(context);
+            textSliderView.image(R.drawable.banner1);
+            sliderShow.addSlider(textSliderView);
+
+            textSliderView.setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                @Override
+                public void onSliderClick(BaseSliderView slider) {
+                    sliderShow.stopAutoCycle();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            sliderShow.startAutoCycle();
+                        }
+                    },5000);
+                }
+            });
+
+            TextSliderView textSliderView2 = new TextSliderView(context);
+            textSliderView2.description("第二个轮播图的描述信息").image(R.drawable.banner2);
+            sliderShow.addSlider(textSliderView2);
+
+            TextSliderView textSliderView3 = new TextSliderView(context);
+            textSliderView3.description("第二个轮播图的描述信息").image(R.drawable.banner3);
+            sliderShow.addSlider(textSliderView3);
+
+            sliderShow.setDuration(2000);
+            sliderShow.setPresetTransformer(SliderLayout.Transformer.Default);
+            sliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
+
         }
+
+
     }
 
 
