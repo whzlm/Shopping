@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".home.activity.ProInfoActivity"
     android:orientation="vertical"
     >
@@ -12,46 +12,275 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/purple_200"
             android:orientation="vertical"
             >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:src="@drawable/logo"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:src="@drawable/logo"
-                />
-            
+                android:layout_height="60dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+<!--                商品名称价格等-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="8dp"
+                    >
+
+<!--                    卷后，卷前-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="卷后¥25.9"
+                            android:textColor="#F44336"
+                            android:id="@+id/layout1_tv1"
+                            android:textSize="20dp"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="卷前¥29.9"
+                            android:textColor="#ACA8A8"
+                            android:layout_toRightOf="@+id/layout1_tv1"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="5dp"
+                            />
+
+                        <TextView
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已拼1628件"
+                            android:textColor="#ACA8A8"
+                            android:layout_alignParentRight="true"
+                            />
+                    </RelativeLayout>
+
+<!--                    优惠卷，折扣-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="6dp"
+                        >
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F44336"
+                            android:gravity="center"
+                            android:text="4元无门槛卷"
+                            android:background="@drawable/zk_shape"
+                            />
+                        <TextView
+
+                            android:layout_marginLeft="8dp"
+                            android:textColor="#F44336"
+                            android:layout_width="65dp"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="2件8.7折"
+                            android:background="@drawable/zk_shape"
+                            />
+                        <TextView
+                            android:layout_marginLeft="8dp"
+                            android:textColor="#F44336"
+                            android:layout_width="90dp"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:text="满70元减4元"
+                            android:background="@drawable/zk_shape"
+                            />
+                    </LinearLayout>
+<!--                    产品名称-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="森马短袖T血男2022纯棉到剪贴板什么大码打底韩版休闲半袖棉到剪贴板什么大码打底韩版休闲半袖"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:layout_marginTop="10dp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#32FB03"
+                        android:layout_marginTop="10dp"
+                        />
+
+<!--                    三包信息-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="全场包邮  ·  7天无理由退货  ·  48小时发货  ·  假一赔十"
+                            android:textColor="#ACA8A8"
+                            />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/re_right_small"
+                            android:layout_alignParentRight="true"
+                            />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#32FB03"
+                        android:layout_marginTop="10dp"
+                        />
+
+<!--                    直播间-->
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ACA8A8"
+                            android:text="进入更多【时尚潮流男装】直播间"
+                            android:drawablePadding="5dp"
+                            android:drawableLeft="@drawable/proinfo_zb"
+                            android:gravity="center"
+                            />
+
+                        <ImageView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/re_right_small"
+                            android:layout_alignParentRight="true"
+                            />
+                    </RelativeLayout>
+
+                </LinearLayout>
 
 
+                <!--两个版块间较大分隔线 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="#A9EDA9"
+                    />
 
+<!--                拼单信息-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="8dp"
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3人在拼单，可直接参与"
 
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="查看更多"
+                            android:layout_alignParentRight="true"
+                            android:drawableRight="@drawable/re_right_small"
+                            />
+
+                    </RelativeLayout>
+<!--                    可拼单信息-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:id="@+id/pd_img1"
+                                android:src="@drawable/user_icon1"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="用户头像"
+                                android:layout_toRightOf="@+id/pd_img1"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="8dp"
+                                />
+
+                            <TextView
+                                android:layout_width="60dp"
+                                android:layout_height="30dp"
+                                android:background="#F44336"
+                                android:text="去拼单"
+                                android:gravity="center"
+                                android:layout_alignParentRight="true"
+                                android:textColor="@color/white"
+                                android:layout_centerVertical="true"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#ACA8A8"
+                                android:text="还差1人拼成"
+                                />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
+
+
 
 
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:background="@color/purple_700"
         android:layout_alignParentBottom="true"
         >
-
-
     </LinearLayout>
 
 

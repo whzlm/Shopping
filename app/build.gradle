@@ -29,6 +29,7 @@ android {
 }
 
 dependencies {
+    compile 'com.zhy:magic-viewpager:1.0.1'
 
     //    轮播图插件
     compile "com.android.support:support-v4:+"

@@ -2,15 +2,17 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="135dp"
+    android:layout_height="160dp"
     android:gravity="center"
-    android:background="@color/purple_200"
+    android:layout_centerInParent="true"
+    android:layout_marginTop="10dp"
     >
 
-   <androidx.recyclerview.widget.RecyclerView
+   <androidx.viewpager.widget.ViewPager
        android:layout_width="match_parent"
-       android:layout_height="200dp"
-       android:id="@+id/ch_recycleview"
+       android:layout_height="wrap_content"
+       android:id="@+id/vp1"
+       android:clipChildren="false"
        />
 
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.os.Handler;
 
 import com.example.shoping.MainActivity;
 import com.example.shoping.R;
+import com.example.shoping.home.activity.ProInfoActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 
