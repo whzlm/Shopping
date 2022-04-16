@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.shoping.R;
 import com.example.shoping.home.entry.Product;
 import com.example.shoping.home.entry.Recommend;
@@ -39,8 +40,8 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(int position){
-//            imageView.setImageResource(recommendList.get(position).getImg());
-//            textView1.setText(recommendList.get(position).getTitle());
+            Glide.with(context).load("http://124.221.67.36:9998/android/upload/"+recommendList.get(position).getImg()+".jpg").into(imageView);
+            textView1.setText(recommendList.get(position).getName());
             textView2.setText("￥:"+recommendList.get(position).getPrice());
         }
     }

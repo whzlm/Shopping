@@ -6,6 +6,36 @@ public class Product {
     private double price;
     private double oldPrice;
     private String img;
+    private int total;
+    private String type;
+
+    public Product(){}
+    public Product(int id, String name, double oldPrice, double price, String img, int total, String type) {
+        this.id = id;
+        this.name = name;
+        this.oldPrice = oldPrice;
+        this.price = price;
+        this.img = img;
+        this.total = total;
+        this.type = type;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
 
     public int getId() {
         return id;

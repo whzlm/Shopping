@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.shoping.R;
 import com.example.shoping.home.entry.Product;
 import com.example.shoping.home.entry.Sg;
@@ -39,10 +40,12 @@ public class SgAdapter extends RecyclerView.Adapter {
             textView2 = itemView.findViewById(R.id.price);
         }
 
-        public void setData(int positon){
-//            imageView.setImageResource(sgList.get(positon).getSgimg());
-//            textView1.setText("￥"+sgList.get(positon).getSgprice());
-            textView2.setText("￥"+sgList.get(positon).getPrice());
+        public void setsgData(int  position){
+            Product product = sgList.get(position);
+            Glide.with(context).load("http://124.221.67.36:9998/android/upload/"+product.getImg()+".jpg").into(imageView);
+
+            textView1.setText("￥"+product.getPrice());
+            textView2.setText("￥"+product.getOldPrice());
             textView2.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             textView2.getPaint().setAntiAlias(true);
         }
@@ -60,7 +63,7 @@ public class SgAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         SgHolder sgHolder = (SgHolder) holder;
-        sgHolder.setData(position);
+        sgHolder.setsgData(position);
     }
 
     @Override

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.shoping.R;
 import com.example.shoping.home.entry.Hot;
 import com.example.shoping.home.entry.Product;
@@ -38,8 +39,9 @@ public class HotAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(int position){
-//            imageView.setImageResource(hotList.get(position).getImg());
-//            textView1.setText(hotList.get(position).getTitle());
+
+            Glide.with(context).load("http://124.221.67.36:9998/android/upload/"+hotList.get(position).getImg()+".jpg").into(imageView);
+            textView1.setText(hotList.get(position).getName());
             textView2.setText(hotList.get(position).getPrice()+"");
         }
     }
