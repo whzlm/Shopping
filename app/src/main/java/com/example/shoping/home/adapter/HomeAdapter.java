@@ -2,15 +2,21 @@ package com.example.shoping.home.adapter;
 
 import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -19,12 +25,18 @@ import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.example.shoping.R;
 import com.example.shoping.home.entry.Channel;
+import com.example.shoping.home.entry.HomeDataBean;
+import com.example.shoping.home.entry.Hot;
+import com.example.shoping.home.entry.Product;
+import com.example.shoping.home.entry.Recommend;
+import com.example.shoping.home.entry.Sg;
 import com.zhy.magicviewpager.transformer.AlphaPageTransformer;
 import com.zhy.magicviewpager.transformer.RotateDownPageTransformer;
 import com.zhy.magicviewpager.transformer.RotateYTransformer;
 import com.zhy.magicviewpager.transformer.ScaleInTransformer;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter {
@@ -32,10 +44,15 @@ public class HomeAdapter extends RecyclerView.Adapter {
     public static final int BANNER = 0;
     public static final int CHANNEL = 1;
     public static final int AD = 2;
+    public static final int SG = 3;
+    public static final int RECOMMEND = 4;
+    public static final int HOT = 5;
 
+    private HomeDataBean homeDataBean;
     private Context context;
-    public HomeAdapter(Context context){
+    public HomeAdapter(Context context ,HomeDataBean homeDataBean){
         this.context = context;
+        this.homeDataBean=homeDataBean;
     }
 
     @NonNull
@@ -55,14 +72,48 @@ public class HomeAdapter extends RecyclerView.Adapter {
                 View view3 = LayoutInflater.from(context).inflate(R.layout.home_ad_item,parent,false);
                 holder = new AdHolder(view3);
                 break;
+            case SG:
+                View view4 = LayoutInflater.from(context).inflate(R.layout.home_sg_item,parent,false);
+                holder = new SGHolder(view4);
+                break;
+            case RECOMMEND:
+                View view5 = LayoutInflater.from(context).inflate(R.layout.home_recommend_item,parent,false);
+                holder = new RecommendHolder(view5);
+                break;
+            case HOT:
+                View view6 = LayoutInflater.from(context).inflate(R.layout.home_hot_item,parent,false);
+                holder = new HotHolder(view6);
+                break;
         }
-
         return holder;
     }
 
     @Override  //绑定数据
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int spoition) {
-        //
+        //填充Holder中需要绑定的数据
+        switch (getItemViewType(spoition)){
+            case BANNER:
+
+                break;
+            case CHANNEL:
+
+                break;
+            case AD:
+
+                break;
+            case SG:
+                SGHolder sgHolder = (SGHolder) holder;
+                sgHolder.setData(homeDataBean.getSg_pros());
+                break;
+            case RECOMMEND:
+                RecommendHolder recommendHolder = (RecommendHolder) holder;
+                recommendHolder.setData(homeDataBean.getRecommend_pros());
+                break;
+            case HOT:
+                HotHolder hotHolder = (HotHolder) holder;
+                hotHolder.setData(homeDataBean.getHot_pros());
+                break;
+        }
     }
 
     @Override
@@ -78,13 +129,22 @@ public class HomeAdapter extends RecyclerView.Adapter {
             case AD:
                 type = AD;
                 break;
+            case SG:
+                type = SG;
+                break;
+            case RECOMMEND:
+                type = RECOMMEND;
+                break;
+            case HOT:
+                type = HOT;
+                break;
         }
         return type;
     }
 
     @Override  //总共有几项
     public int getItemCount() {
-        return 3;
+        return 6;
     }
 
     class BannerHolder extends RecyclerView.ViewHolder{
@@ -112,7 +172,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
             });
 
             TextSliderView textSliderView2 = new TextSliderView(context);
-            textSliderView2.description("第二个轮播图的描述信息").image(R.drawable.banner2);
+            textSliderView2.description("第一个轮播图的描述信息").image(R.drawable.banner2);
             sliderShow.addSlider(textSliderView2);
 
             TextSliderView textSliderView3 = new TextSliderView(context);
@@ -139,7 +199,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
             //创建Adapter---ChannerAdapter
             List<Channel> list = initChannel();  //数据
             ChannelAdapter adapter = new ChannelAdapter(context,list);
-            //注入数据
+
             //添加适配器
             recyclerView.setAdapter(adapter);
             //设置布局管理器
@@ -206,6 +266,93 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
 
 
+    TextView djsTv;
+    class SGHolder extends RecyclerView.ViewHolder{
+        private List<Product> sgList;
+        RecyclerView recyclerView;
+        TextView sg_more_tv;
+
+        public SGHolder(@NonNull View itemView) {
+            super(itemView);
+            recyclerView = itemView.findViewById(R.id.sg_recycleview);
+            djsTv = itemView.findViewById(R.id.countdown);
+            sg_more_tv = itemView.findViewById(R.id.check_more);
+
+        }
+
+        public void setData(List<Product> sg_pro_list){
+            SgAdapter sgAdapter = new SgAdapter(sg_pro_list,context);
+            recyclerView.setAdapter(sgAdapter);
+
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,RecyclerView.HORIZONTAL, false);
+            recyclerView.setLayoutManager(linearLayoutManager);
+        }
+
+        public void setcountdown(){
+            //发延时消息，每隔一秒，减一，并设置到界面上
+            Date date = new Date();//当前时间---服务器返回的时间
+            Long nowtime = date.getTime(); //毫秒----到现在的总毫秒数
+            //倒数计时两小时
+            Message msg = new Message();
+            handler.sendMessage(msg);
+        }
+
+    }
+    private int totalTime = 2*60*60*1000;
+    public Handler handler = new Handler(Looper.getMainLooper()){
+         @Override
+        public void handleMessage(@NonNull Message msg){
+             super.handleMessage(msg);
+             if (msg.what == 9){
+                 totalTime = totalTime - 1000;
+                 if (djsTv!=null){
+                     djsTv.setText(new Date(totalTime).toLocaleString());
+                 }
+             }
+         }
+    };
+
+
+
+    class RecommendHolder extends RecyclerView.ViewHolder{
+        RecyclerView recyclerView;
+        RecommendAdapter recommendAdapter;
+
+        List<Product> recommendList;
+        public RecommendHolder(@NonNull View itemView) {
+            super(itemView);
+
+            recyclerView = itemView.findViewById(R.id.recmd_recycleview);
+
+        }
+        public void setData(List<Product> recommend_list){
+            recommendAdapter = new RecommendAdapter(recommend_list,context);
+            recyclerView.setAdapter(recommendAdapter);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context,RecyclerView.HORIZONTAL, false);
+            recyclerView.setLayoutManager(linearLayoutManager);
+        }
+
+
+    }
+
+    class HotHolder extends RecyclerView.ViewHolder{
+        RecyclerView recyclerView;
+        HotAdapter hotAdapter;
+        List<Product> hotList;
+        public HotHolder(@NonNull View itemView) {
+            super(itemView);
+            recyclerView = itemView.findViewById(R.id.hot_recycleview);
+
+        }
+        public void setData(List<Product> hot_list){
+            hotAdapter = new HotAdapter(hot_list,context);
+            recyclerView.setAdapter(hotAdapter);
+
+            StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,RecyclerView.VERTICAL);
+            recyclerView.setLayoutManager(staggeredGridLayoutManager);
+        }
+
+    }
 
 
 }
